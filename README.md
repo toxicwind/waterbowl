@@ -1,25 +1,25 @@
-# kennel
+# waterbowl
 
 One persistent shared headed Chromium for the whole estate, plus the
 keeper-first MCP server that drives it — the deep-red copper-oxide core of the
 estate's agent browser lane. First-class citizen of the geode pen:
-`pens/geode/products/kennel`.
+`pens/geode/products/waterbowl`.
 
 - **The daemon** — one persistent headed Chromium. Owns
   `/home/toxic/.browserless/profiles/nv-audit` exclusively, exposes CDP on
-  `127.0.0.1:25234`, writes `/home/toxic/.browserless/kennel/status.json`,
+  `127.0.0.1:25234`, writes `/home/toxic/.browserless/waterbowl/status.json`,
   relaunches Chromium if it dies. Single-instance: exits if CDP already
-  answers. Supervised as `[daemons.kennel]` (pitchfork) on Xvnc `:99`.
+  answers. Supervised as `[daemons.waterbowl]` (pitchfork) on Xvnc `:99`.
 - **The MCP server** (`src/`, built to `dist/`) — stdio MCP server
   (`browserless-mcp` 1.3.0). Eleven `[keeper-first]` `persistent_*` tools
-  attach via `chromium.connectOverCDP` to kennel — no
+  attach via `chromium.connectOverCDP` to waterbowl — no
   `initialize_browserless` needed, logins/tabs/state survive across tasks.
 - **The surface** — the DP-2 quickshell `ii` section: top slot = this
   browser, bottom slot = normal grid. Mouse-first, never steals focus.
 
 ## What it is
 
-`kennel` (ex `browser-keeper`) is the estate's shared browser: a single
+`waterbowl` (ex `browser-keeper`) is the estate's shared browser: a single
 long-lived Chromium that every agent drives through MCP instead of each
 spawning its own ephemeral session. The daemon keeps the browser alive; the
 MCP server is the control plane. Both live here, built and versioned
@@ -32,13 +32,13 @@ together.
 ## Layout
 
 - `keeper.cjs` — legacy CJS daemon (kept for reference; the live daemon is
-  `bin/kennel.ts`).
-- `bin/kennel.ts` — thin bun entry; supervisor lives in `src/keeper/`
+  `bin/waterbowl.ts`).
+- `bin/waterbowl.ts` — thin bun entry; supervisor lives in `src/keeper/`
   (`browser.ts`, `supervisor.ts`, `status.ts`, `config.ts`).
-- `kennel.sh` — pitchfork launcher: unsets `WAYLAND_DISPLAY`, sets
+- `waterbowl.sh` — pitchfork launcher: unsets `WAYLAND_DISPLAY`, sets
   `DISPLAY=:99`, execs the entry (the keeper never renders in the
   Architect's Hyprland session).
-- `pitchfork.fragment.toml` — `[daemons.kennel]`; merge into
+- `pitchfork.fragment.toml` — `[daemons.waterbowl]`; merge into
   `/home/toxic/pens/estate/pitchfork.toml` (monolith is truth).
 - `browser-toggle.sh` — shows/hides the **VNC viewer** window (the TigerVNC
   client that renders the isolated keeper display).
@@ -56,11 +56,11 @@ together.
 
 ```bash
 # supervisor (preferred)
-cd /home/toxic/pens/estate && ./bin/pitchfork-restart kennel --cold
+cd /home/toxic/pens/estate && ./bin/pitchfork-restart waterbowl --cold
 
 # direct
-DISPLAY=:99 XDG_RUNTIME_DIR=/run/user/1000 KENNEL_CDP_PORT=25234 \
-  bun run bin/kennel.ts
+DISPLAY=:99 XDG_RUNTIME_DIR=/run/user/1000 WATERBOWL_CDP_PORT=25234 \
+  bun run bin/waterbowl.ts
 
 # ready check
 curl -sf http://127.0.0.1:25234/json/version
@@ -72,10 +72,10 @@ dependency so it never relaunch-loops on "Missing X server".
 ## MCP registration
 
 Thresher's `mcp_config.json` (`pens/estate/config/thresher/`) carries the
-kennel entry: `bun dist/index.js` with
+waterbowl entry: `bun dist/index.js` with
 
 ```json
-{ "KENNEL_CDP": "http://127.0.0.1:25234" }
+{ "WATERBOWL_CDP": "http://127.0.0.1:25234" }
 ```
 
 (`dist/` is the built MCP server; rebuild with `bun run build` after editing
@@ -86,7 +86,7 @@ kennel entry: `bun dist/index.js` with
 - Loopback-only CDP (`127.0.0.1:25234`) — never exposed on the LAN.
 - VNC password at `/home/toxic/.browserless/vncpasswd`; noVNC loopback-only,
   tailnet via `tailscale serve :8443` if ever needed.
-- Never paste tokens into agent sessions; the kennel profile persists
+- Never paste tokens into agent sessions; the waterbowl profile persists
   sessions across tasks by design (cookies auto-backup to
   `.browserless/cookies-backup.json`).
 

@@ -1,11 +1,11 @@
-// kennel: the estate's persistent shared headed browser + agent surface (geode, keeper lineage).
+// waterbowl: the estate's persistent shared headed browser + agent surface (geode, keeper lineage).
 //
 // Owns PROFILE_DIR exclusively. Exposes CDP on 127.0.0.1:25234 for MCP tasks
 // (browserless-mcp persistent_* tools), one-shot scripts via
 // chromium.connectOverCDP, and debugging. Relaunches itself when Chromium
 // dies. Pitchfork supervises the keeper process itself.
 //
-// Status: /home/toxic/.browserless/kennel/status.json
+// Status: /home/toxic/.browserless/waterbowl/status.json
 const { chromium } = require("playwright-core");
 const fs = require("fs");
 const http = require("http");
@@ -15,8 +15,8 @@ const { execSync } = require("child_process");
 const PROFILE_DIR = "/home/toxic/.browserless/profiles/nv-audit";
 // CDP port must come from the estate Port SSOT (config/ports.env -> 25xxx),
 // not hardcoded: piano — pitchfork injects env_file; dev/fallback = 25234.
-const CDP_PORT = Number(process.env.KENNEL_CDP_PORT) || 25234;
-const KEEPER_DIR = "/home/toxic/.browserless/kennel";
+const CDP_PORT = Number(process.env.WATERBOWL_CDP_PORT) || 25234;
+const KEEPER_DIR = "/home/toxic/.browserless/waterbowl";
 const STATUS_FILE = path.join(KEEPER_DIR, "status.json");
 
 const log = (...args) => console.log(new Date().toISOString(), "[keeper]", ...args);

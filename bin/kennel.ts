@@ -1,5 +1,5 @@
 #!/usr/bin/env bun
-// bin/kennel.ts — thin entry for the kennel daemon.
+// bin/waterbowl.ts — thin entry for the waterbowl daemon.
 //
 // One persistent headed Chromium on DISPLAY :99 (Xvnc), CDP on 127.0.0.1:<port>.
 // All logic lives in src/keeper/{browser,status,supervisor}.ts; this file only

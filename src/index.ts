@@ -888,7 +888,7 @@ class BrowserlessMCPServer {
     await this.server.connect(transport);
     mlog("info", "browserless-mcp started", {
       version: "1.3.0",
-      keeperCdp: process.env.KENNEL_CDP || "http://127.0.0.1:25234",
+      keeperCdp: process.env.WATERBOWL_CDP || "http://127.0.0.1:25234",
     });
     // Shut down cleanly when stdin closes (MCP client disconnect/EOF).
     process.stdin.on('end', () => { void this.shutdown().then(() => process.exit(0)); });
@@ -914,12 +914,12 @@ class BrowserlessMCPServer {
 /**
  * Startup readiness probe: the persistent_* tools are the first-class path,
  * so refuse to start half-working when the keeper is down. Bypass only with
- * KENNEL_MCP_ALLOW_NO_KEEPER=1 (maintenance).
+ * WATERBOWL_MCP_ALLOW_NO_KEEPER=1 (maintenance).
  */
 async function probeKeeperOrDie(): Promise<void> {
-  const cdp = process.env.KENNEL_CDP || "http://127.0.0.1:25234";
-  if (process.env.KENNEL_MCP_ALLOW_NO_KEEPER === "1") {
-    mlog("warn", "keeper readiness probe skipped (KENNEL_MCP_ALLOW_NO_KEEPER=1)");
+  const cdp = process.env.WATERBOWL_CDP || "http://127.0.0.1:25234";
+  if (process.env.WATERBOWL_MCP_ALLOW_NO_KEEPER === "1") {
+    mlog("warn", "keeper readiness probe skipped (WATERBOWL_MCP_ALLOW_NO_KEEPER=1)");
     return;
   }
   try {
@@ -934,7 +934,7 @@ async function probeKeeperOrDie(): Promise<void> {
       {
         cdp,
         error: errMsg(e),
-        hint: "start the kennel first: pitchfork start kennel (or set KENNEL_MCP_ALLOW_NO_KEEPER=1)",
+        hint: "start the waterbowl first: pitchfork start waterbowl (or set WATERBOWL_MCP_ALLOW_NO_KEEPER=1)",
       }
     );
     process.exit(1);

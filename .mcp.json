@@ -1,6 +1,6 @@
 {
 	"mcpServers": {
-		"DelendAI:kennel": {
+		"DelendAI:waterbowl": {
 			"type": "stdio",
 			"command": "bunx",
 			"args": [
@@ -11,7 +11,7 @@
 				"--workspace",
 				".",
 				"--name",
-				"DelendAI:kennel"
+				"DelendAI:waterbowl"
 			]
 		}
 	}

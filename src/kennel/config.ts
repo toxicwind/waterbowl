@@ -1,4 +1,4 @@
-// config.ts — shared constants + config resolution for the kennel.
+// config.ts — shared constants + config resolution for the waterbowl.
 //
 // Pure constants only; executable resolution and chromium spawning live in
 // browser.ts. Keeping this file free of filesystem calls makes it trivially
@@ -9,7 +9,7 @@
  * the env override without a fresh process; the const below snapshots it.
  */
 export function readCdpPort(): number {
-  return Number(process.env.KENNEL_CDP_PORT ?? 25234);
+  return Number(process.env.WATERBOWL_CDP_PORT ?? 25234);
 }
 
 /** Resolve the chromium profile dir. See readCdpPort for the rationale. */
@@ -22,7 +22,7 @@ export function readProfileDir(): string {
 
 export const CDP_PORT = readCdpPort();
 export const PROFILE_DIR = readProfileDir();
-export const KEEPER_DIR = "/home/toxic/.browserless/kennel";
+export const KEEPER_DIR = "/home/toxic/.browserless/waterbowl";
 export const STATUS_FILE = `${KEEPER_DIR}/status.json`;
 export const DEFAULT_DISPLAY = ":99";
 

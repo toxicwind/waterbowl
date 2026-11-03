@@ -1,4 +1,4 @@
-// status.ts — status.json write for the kennel.
+// status.ts — status.json write for the waterbowl.
 //
 // The keeper writes a machine-readable status file that the persistent_*
 // MCP tools and human operators read to understand keeper health at a glance

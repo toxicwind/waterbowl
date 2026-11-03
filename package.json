@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
-  "name": "kennel",
+  "name": "waterbowl",
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/index.ts",

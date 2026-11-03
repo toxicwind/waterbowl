@@ -1,6 +1,6 @@
 {
 	"servers": {
-		"DelendAI:kennel": {
+		"DelendAI:waterbowl": {
 			"type": "stdio",
 			"command": "bunx",
 			"args": [
@@ -11,7 +11,7 @@
 				"--workspace",
 				"${workspaceFolder}",
 				"--name",
-				"DelendAI:kennel"
+				"DelendAI:waterbowl"
 			]
 		}
 	}
