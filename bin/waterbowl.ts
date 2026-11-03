@@ -2,21 +2,21 @@
 // bin/waterbowl.ts — thin entry for the waterbowl daemon.
 //
 // One persistent headed Chromium on DISPLAY :99 (Xvnc), CDP on 127.0.0.1:<port>.
-// All logic lives in src/keeper/{browser,status,supervisor}.ts; this file only
+// All logic lives in src/kennel/{browser,status,supervisor}.ts; this file only
 // wires configuration + signal handling and hands off to the supervisor loop.
 
 import {
   spawnChromium,
   resolveChromiumExecutable,
-} from "../src/keeper/browser.js";
-import { runSupervisor } from "../src/keeper/supervisor.js";
-import { cdpAlive as probeCdp, writeStatus } from "../src/keeper/status.js";
+} from "../src/kennel/browser.js";
+import { runSupervisor } from "../src/kennel/supervisor.js";
+import { cdpAlive as probeCdp, writeStatus } from "../src/kennel/status.js";
 import {
   CDP_BASE,
   CDP_PORT,
   CDP_VERSION_URL,
   jestResetEnv,
-} from "../src/keeper/config.js";
+} from "../src/kennel/config.js";
 
 const log = (...a: unknown[]) =>
   console.log(new Date().toISOString(), "[keeper]", ...a);
