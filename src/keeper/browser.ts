@@ -42,7 +42,18 @@ export function spawnChromium(
   const proc = Bun.spawn(
     [executable, ...CHROMIUM_ARGS, ...extraArgs, "about:blank"],
     {
-      env: process.env,
+      env: (() => {
+        // Lane pin at SPAWN time (2026-11-03): jestResetEnv runs once at daemon
+        // entry, but any spawn after an env mutation (or an entry predating the
+        // pin) would launch the browser onto the caller's desktop (:0). The
+        // keeper lane is DEFINED as the Xvnc :99 desktop — force it here, per
+        // spawn, so relaunches can never drift onto the architect's Wayland
+        // session. XDG_RUNTIME_DIR keeps the default when unset.
+        const env = { ...process.env };
+        delete env.WAYLAND_DISPLAY;
+        env.DISPLAY = ":99";
+        return env;
+      })(),
       stdout: "pipe",
       stderr: "pipe",
     },
