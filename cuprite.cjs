@@ -1,12 +1,12 @@
-// browser-keeper: one persistent headed Chromium for the whole mesh.
+// cuprite: the estate's persistent shared headed browser + agent surface (geode, keeper lineage).
 //
-// Owns PROFILE_DIR exclusively. Exposes CDP on 127.0.0.1:9223 for MCP tasks
+// Owns PROFILE_DIR exclusively. Exposes CDP on 127.0.0.1:25234 for MCP tasks
 // (browserless-mcp persistent_* tools), one-shot scripts via
 // chromium.connectOverCDP, and debugging. Relaunches itself when Chromium
 // dies. Pitchfork supervises the keeper process itself.
 //
-// Status: /home/toxic/.browserless/keeper/status.json
-const { chromium } = require("/home/toxic/.browserless/app/node_modules/playwright-core");
+// Status: /home/toxic/.browserless/cuprite/status.json
+const { chromium } = require("playwright-core");
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
@@ -14,9 +14,9 @@ const { execSync } = require("child_process");
 
 const PROFILE_DIR = "/home/toxic/.browserless/profiles/nv-audit";
 // CDP port must come from the estate Port SSOT (config/ports.env -> 25xxx),
-// not a hardcoded 9223. pitchfork injects env_file; dev/fallback = 25154.
-const CDP_PORT = Number(process.env.BROWSER_KEEPER_CDP_PORT) || 25154;
-const KEEPER_DIR = "/home/toxic/.browserless/keeper";
+// not hardcoded: piano — pitchfork injects env_file; dev/fallback = 25234.
+const CDP_PORT = Number(process.env.CUPRITE_CDP_PORT) || 25234;
+const KEEPER_DIR = "/home/toxic/.browserless/cuprite";
 const STATUS_FILE = path.join(KEEPER_DIR, "status.json");
 
 const log = (...args) => console.log(new Date().toISOString(), "[keeper]", ...args);
@@ -155,7 +155,7 @@ async function launchOnce() {
     try {
       const { execSync } = require("child_process");
       execSync(
-        "bun /home/toxic/estate/ranch/cookie-vault/bin/cookie-vault.js sync",
+        "bun /home/toxic/pens/ranch/products/cookie-vault/bin/cookie-vault.js sync",
         { timeout: 20000, env: Object.assign({}, process.env, { DISPLAY: ":99" }) },
       );
       log("cookie-vault: synced full Firefox session (cookies + localStorage) into keeper");

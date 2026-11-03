@@ -3,7 +3,7 @@
  * thresher-smoke.ts — keeper exercise suite THROUGH the Thresher connector.
  *
  * Tansy 2026-10-19 (T3), DP3 refresh 2026-10-26. Lanes consume the keeper via
- * Thresher (mcpproxy daemon :25127 -> browserless MCP -> keeper CDP :25233),
+ * Thresher (mcpproxy daemon :25127 -> browserless MCP -> keeper CDP :25234),
  * not via raw CDP — so this suite drives that exact path end-to-end:
  * status, tabs, new_tab, fill, click, evaluate, text, screenshot, close_tab.
  *

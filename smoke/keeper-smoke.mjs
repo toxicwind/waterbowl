@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// keeper smoke suite — runs against the LIVE keeper (CDP 127.0.0.1:9223).
+// cuprite smoke suite — runs against the LIVE keeper (CDP 127.0.0.1:25234).
 //
 // Flow: status -> tabs -> new_tab(scratch) -> activate -> navigate ->
 // evaluate -> pageText -> screenshot -> error paths -> close_tab -> status.

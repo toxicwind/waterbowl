@@ -1,12 +1,13 @@
-# Pitchfork daemon record — browser lane (Forge 2026-09-21).
-# Already merged into /home/toxic/pens/estate/pitchfork.toml; this file is the
-# committed record, not a merge source. Owned restart from /home/toxic/estate:
-#   ./bin/pitchfork-restart <agent-display|agent-viewer> --reregister
+# Pitchfork daemon record — cuprite (geode, keeper lineage).
+# The estate's ONE persistent shared headed browser + agent surface.
+# Canonical: [daemons.cuprite] CDP :25234 health, ready :25236 (reserved).
+# Supersedes: browser-keeper (:9223), skopos (:25233), skopos-failover —
+# all retired 2026-11-02 as split-brain (27 relaunch spiral). One daemon now.
 
 [daemons.agent-display]
 # Isolated virtual display for the agent browser.
 port = 5900
-run = "exec Xvnc :99 -geometry 1600x900 -depth 24 -rfbport 5900 -localhost -SecurityTypes VncAuth -rfbauth /home/toxic/.browserless/vncpasswd"
+run = "exec Xvnc :99 -geometry 3840x2160 -depth 24 -rfbport 5900 -localhost -SecurityTypes VncAuth -rfbauth /home/toxic/.browserless/vncpasswd"
 dir = "."
 mise = false
 retry = true
@@ -16,7 +17,6 @@ auto = ["start"]
 
 [daemons.agent-viewer]
 # noVNC web viewer. INTERACTIVE (the Architect 2026-09-21); loopback-only.
-# External access: tailnet-only via tailscale serve :8443 (no funnel, no token gate).
 port = 6080
 run = "exec /home/toxic/.local/bin/websockify --web /home/toxic/.browserless/novnc 127.0.0.1:6080 127.0.0.1:5900"
 dir = "."
@@ -26,13 +26,15 @@ ready_cmd = "curl -sf http://127.0.0.1:6080/vnc.html > /dev/null"
 boot_start = true
 auto = ["start"]
 
-[daemons.browser-keeper]
-port = 9223
-run = "exec /home/toxic/pens/estate/ranch/stable/keeper/keeper.sh"
-dir = "."
+[daemons.cuprite]
+port = 25234
+run = "exec /home/toxic/.bun/bin/bun run /home/toxic/pens/geode/products/cuprite/bin/cuprite.ts"
+dir = "/home/toxic/pens/geode/products/cuprite"
 mise = false
 retry = true
-ready_cmd = "curl -sf http://127.0.0.1:9223/json/version > /dev/null"
+ready_cmd = "curl -sf http://127.0.0.1:25234/json/version > /dev/null"
+health_http = { url = "http://127.0.0.1:25234/", interval = "30s", timeout = "5s", retries = 3 }
 boot_start = true
-env = { DISPLAY = ":99", XDG_RUNTIME_DIR = "/run/user/1000" }
+depends = ["agent-display"]
+env = { DISPLAY = ":99", XDG_RUNTIME_DIR = "/run/user/1000", CUPRITE_CDP_PORT = "25234", CUPRITE_CDP = "http://127.0.0.1:25234", KEEPER_CHROMIUM_EXECUTABLE = "/home/toxic/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome" }
 auto = ["start"]

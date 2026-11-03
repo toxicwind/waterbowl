@@ -1,6 +1,6 @@
 {
 	"mcpServers": {
-		"DelendAI:browser-keeper": {
+		"DelendAI:cuprite": {
 			"type": "stdio",
 			"command": "bunx",
 			"args": [
@@ -11,7 +11,7 @@
 				"--workspace",
 				".",
 				"--name",
-				"DelendAI:browser-keeper"
+				"DelendAI:cuprite"
 			]
 		}
 	}
