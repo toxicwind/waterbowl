@@ -28,7 +28,7 @@
   },
   "license": "MIT",
   "main": "dist/index.js",
-  "name": "cuprite",
+  "name": "kennel",
   "scripts": {
     "build": "tsc",
     "dev": "tsx src/index.ts",

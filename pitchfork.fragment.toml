@@ -1,6 +1,6 @@
-# Pitchfork daemon record — cuprite (geode, keeper lineage).
+# Pitchfork daemon record — kennel (geode, keeper lineage).
 # The estate's ONE persistent shared headed browser + agent surface.
-# Canonical: [daemons.cuprite] CDP :25234 health, ready :25236 (reserved).
+# Canonical: [daemons.kennel] CDP :25234 health, ready :25236 (reserved).
 # Supersedes: browser-keeper (:9223), skopos (:25233), skopos-failover —
 # all retired 2026-11-02 as split-brain (27 relaunch spiral). One daemon now.
 
@@ -26,15 +26,15 @@ ready_cmd = "curl -sf http://127.0.0.1:6080/vnc.html > /dev/null"
 boot_start = true
 auto = ["start"]
 
-[daemons.cuprite]
+[daemons.kennel]
 port = 25234
-run = "exec /home/toxic/.bun/bin/bun run /home/toxic/pens/geode/products/cuprite/bin/cuprite.ts"
-dir = "/home/toxic/pens/geode/products/cuprite"
+run = "exec /home/toxic/.bun/bin/bun run /home/toxic/pens/geode/products/kennel/bin/kennel.ts"
+dir = "/home/toxic/pens/geode/products/kennel"
 mise = false
 retry = true
 ready_cmd = "curl -sf http://127.0.0.1:25234/json/version > /dev/null"
 health_http = { url = "http://127.0.0.1:25234/", interval = "30s", timeout = "5s", retries = 3 }
 boot_start = true
 depends = ["agent-display"]
-env = { DISPLAY = ":99", XDG_RUNTIME_DIR = "/run/user/1000", CUPRITE_CDP_PORT = "25234", CUPRITE_CDP = "http://127.0.0.1:25234", KEEPER_CHROMIUM_EXECUTABLE = "/home/toxic/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome" }
+env = { DISPLAY = ":99", XDG_RUNTIME_DIR = "/run/user/1000", KENNEL_CDP_PORT = "25234", KENNEL_CDP = "http://127.0.0.1:25234", KEEPER_CHROMIUM_EXECUTABLE = "/home/toxic/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome" }
 auto = ["start"]

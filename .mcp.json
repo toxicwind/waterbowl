@@ -1,6 +1,6 @@
 {
 	"mcpServers": {
-		"DelendAI:cuprite": {
+		"DelendAI:kennel": {
 			"type": "stdio",
 			"command": "bunx",
 			"args": [
@@ -11,7 +11,7 @@
 				"--workspace",
 				".",
 				"--name",
-				"DelendAI:cuprite"
+				"DelendAI:kennel"
 			]
 		}
 	}

@@ -1,6 +1,6 @@
 {
 	"servers": {
-		"DelendAI:cuprite": {
+		"DelendAI:kennel": {
 			"type": "stdio",
 			"command": "bunx",
 			"args": [
@@ -11,7 +11,7 @@
 				"--workspace",
 				"${workspaceFolder}",
 				"--name",
-				"DelendAI:cuprite"
+				"DelendAI:kennel"
 			]
 		}
 	}

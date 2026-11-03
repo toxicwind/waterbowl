@@ -107,21 +107,21 @@ describe("config — CHROMIUM_ARGS", () => {
 
 describe("config — readCdpPort/readProfileDir (env override contract)", () => {
   const saved = {
-    cdp: process.env.CUPRITE_CDP_PORT,
+    cdp: process.env.KENNEL_CDP_PORT,
     profile: process.env.KEEPER_PROFILE_DIR,
   };
 
   test("readCdpPort defaults to 25234", () => {
-    delete process.env.CUPRITE_CDP_PORT;
+    delete process.env.KENNEL_CDP_PORT;
     expect(readCdpPort()).toBe(25234);
-    if (saved.cdp !== undefined) process.env.CUPRITE_CDP_PORT = saved.cdp;
+    if (saved.cdp !== undefined) process.env.KENNEL_CDP_PORT = saved.cdp;
   });
 
-  test("readCdpPort honors CUPRITE_CDP_PORT", () => {
-    process.env.CUPRITE_CDP_PORT = "9999";
+  test("readCdpPort honors KENNEL_CDP_PORT", () => {
+    process.env.KENNEL_CDP_PORT = "9999";
     expect(readCdpPort()).toBe(9999);
-    if (saved.cdp !== undefined) process.env.CUPRITE_CDP_PORT = saved.cdp;
-    else delete process.env.CUPRITE_CDP_PORT;
+    if (saved.cdp !== undefined) process.env.KENNEL_CDP_PORT = saved.cdp;
+    else delete process.env.KENNEL_CDP_PORT;
   });
 
   test("readProfileDir defaults to nv-audit profile", () => {
@@ -346,7 +346,7 @@ describe("status — writeStatus file contract", () => {
   let dir: string;
 
   test("writes schema-complete JSON to an explicit path", () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-status-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-status-"));
     const file = join(dir, "keeper", "status.json");
     writeStatus(
       {
@@ -372,7 +372,7 @@ describe("status — writeStatus file contract", () => {
   });
 
   test("falls back to process.pid when childPid is null", () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-status-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-status-"));
     const file = join(dir, "status.json");
     writeStatus(
       {
@@ -475,7 +475,7 @@ describe("supervisor — runSupervisor state machine", () => {
   let dir: string;
 
   test("clean stop: stopRequested true from the first check", async () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-sup-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-sup-"));
     let stopped = false;
     const states: (string | null)[] = [];
     await runSupervisor(
@@ -495,7 +495,7 @@ describe("supervisor — runSupervisor state machine", () => {
   });
 
   test("spawn failure: backoff branch runs and stop is honored", async () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-sup-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-sup-"));
     const file = join(dir, "status.json");
     const seen: (string | null)[] = [];
     let checks = 0;
@@ -518,7 +518,7 @@ describe("supervisor — runSupervisor state machine", () => {
   });
 
   test("CDP never reachable: child killed after launch probes, backoff, respawn", async () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-sup-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-sup-"));
     const file = join(dir, "status.json");
     let killCalls = 0;
     let spawns = 0;
@@ -546,7 +546,7 @@ describe("supervisor — runSupervisor state machine", () => {
   });
 
   test("child dies before CDP comes up: exitCode path kills it", async () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-sup-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-sup-"));
     let killCalls = 0;
     let checks = 0;
     await runSupervisor(
@@ -568,7 +568,7 @@ describe("supervisor — runSupervisor state machine", () => {
   });
 
   test("healthy: probes CDP true at launch, heartbeats, stops on request", async () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-sup-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-sup-"));
     const file = join(dir, "status.json");
     let probes = 0;
     let stop = false;
@@ -602,7 +602,7 @@ describe("supervisor — runSupervisor state machine", () => {
   });
 
   test("recycle: CDP loss during heartbeat kills, relaunches, then stops", async () => {
-    dir = mkdtempSync(join(tmpdir(), "cuprite-sup-"));
+    dir = mkdtempSync(join(tmpdir(), "kennel-sup-"));
     const file = join(dir, "status.json");
     let probes = 0;
     let stop = false;

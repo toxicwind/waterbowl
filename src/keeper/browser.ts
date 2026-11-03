@@ -1,4 +1,4 @@
-// browser.ts — chromium spawner + executable resolution for the cuprite.
+// browser.ts — chromium spawner + executable resolution for the kennel.
 //
 // Owns the child chromium process for one persistent headed browser on
 // DISPLAY=:99 (Xvnc) with CDP exposed on 127.0.0.1:<port>. Exposes a clean
@@ -32,7 +32,7 @@ export function resolveChromiumExecutable(): string {
 export type ChromiumProc = Bun.Subprocess<"ignore", "pipe", "pipe">;
 
 /**
- * Spawn the headed cuprite chromium. Returns the raw subprocess; the caller
+ * Spawn the headed kennel chromium. Returns the raw subprocess; the caller
  * (supervisor) owns liveness probing and respawn.
  */
 export function spawnChromium(

@@ -1,0 +1,107 @@
+[
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": ".mcp.json"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": ".vscode/mcp.json"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "AGENTS.md"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "AGENTS.md"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "README.md"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "README.md"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "bin/cuprite.ts"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "cuprite.cjs"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "cuprite.cjs"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "package.json"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "pitchfork.fragment.toml"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "pitchfork.fragment.toml"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "smoke/keeper-smoke.mjs"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "src/index.ts"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "src/index.ts"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "src/keeper/browser.ts"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "src/keeper/config.ts"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "src/keeper/config.ts"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "src/keeper/status.ts"
+  },
+  {
+    "from": "cuprite",
+    "to": "kennel",
+    "file": "src/keeper/unit.test.ts"
+  },
+  {
+    "from": "CUPRITE",
+    "to": "KENNEL",
+    "file": "src/keeper/unit.test.ts"
+  }
+]
