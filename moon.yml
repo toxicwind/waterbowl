@@ -1,0 +1,11 @@
+$schema: 'https://moonrepo.dev/schemas/project.json'
+language: 'typescript'
+layer: 'application'
+tasks:
+  build:
+    command: 'bun run build'
+    inputs: ['src/**/*', 'tsconfig.json', 'package.json', 'keeper.cjs', 'keeper.sh', 'bunfig.toml']
+    outputs: ['dist']
+  lint:
+    command: 'bun run lint'
+    inputs: ['src/**/*', '.eslintrc.cjs']
